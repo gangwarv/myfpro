@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
-import 'package:myfpro/core/res/color.dart';
-import 'package:myfpro/core/routes/routes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:myfpro/bloc/shutter_stock_bloc.dart';
+import 'package:myfpro/presentation/screens/main.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Sizer(builder: (context, orientation, deviceType) {
-      return MaterialApp(
-        title: 'Task Management',
-        debugShowCheckedModeBanner: false,
-        theme: AppColors.getTheme,
-        initialRoute: Routes.onBoarding,
-        onGenerateRoute: RouterGenerator.generateRoutes,
-      );
-    });
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        useMaterial3: true,
+      ),
+      home: BlocProvider(
+        create: (context) => ShutterStockBloc(),
+        child: const ListingScreen(),
+      ),
+    );
   }
 }
